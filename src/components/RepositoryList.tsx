@@ -3,8 +3,13 @@ import { RepositoryItem } from "./RepositoryItem";
 
 import "../styles/repositories.scss";
 
+interface Repository {
+  name: string;
+  description: string;
+}
+
 export function RepositoryList() {
-  const [repositories, setRepositories] = useState([]);
+  const [repositories, setRepositories] = useState<Repository[]>([]);
 
   useEffect(() => {
     fetch("https://api.github.com/users/allyson7/repos").then((response) =>
@@ -22,7 +27,6 @@ export function RepositoryList() {
             <RepositoryItem key={repository.name} repository={repository} />
           );
         })}
-        <RepositoryItem />
       </ul>
     </section>
   );
